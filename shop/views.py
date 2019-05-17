@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, render_to_response
 from .models import Category, Product
 from cart.forms import CartAddProductForm
 
@@ -27,4 +27,7 @@ def product_detail(request, id, slug):
                   'shop/product/detail.html',
                   {'product': product,
                    'cart_product_form': cart_product_form})
+
+def index(request):
+    return render_to_response('shop/index.html')
 

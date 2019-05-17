@@ -29,19 +29,17 @@ def payment_process(request):
             order.braintree_id = result.transaction.id
             order.save()
             # create invoice e-mail
-            subject = 'My Shop - Invoice no. {}'.format(order.id)
-            message = 'Please, find attached the invoice for your recent\
-            purchase.'
+            subject = 'Compu Partes - Factura No. {}'.format(order.id)
+            message = 'Por favor, adjunte la factura de su compra reciente.'
             email = EmailMessage(subject,
                                  message,
-                                 'admin@myshop.com',
+                                 'compuparteshuehue@gmail.com',
                                  [order.email])
             # generate PDF
             html = render_to_string('orders/order/pdf.html', {'order': order})
             out = BytesIO()
             stylesheets = [weasyprint.CSS(settings.STATIC_ROOT + 'css/pdf.css')]
-            weasyprint.HTML(string=html).write_pdf(out,
-                                                   stylesheets=stylesheets)
+            weasyprint.HTML(string=html).write_pdf(out, stylesheets=stylesheets)
             # attach PDF file
             email.attach('order_{}.pdf'.format(order.id),
                          out.getvalue(),

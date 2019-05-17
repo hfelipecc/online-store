@@ -2,20 +2,20 @@
 {% load static %}
 
 {% block title %}
-  Your shopping cart
+  Tu carrito de compras
 {% endblock %}
 
 {% block content %}
-  <h1>Your shopping cart</h1>
+  <h1>Tu carrito de compras</h1>
   <table class="cart">
     <thead>
       <tr>
-        <th>Image</th>
-        <th>Product</th>
-        <th>Quantity</th>
-        <th>Remove</th>
-        <th>Unit price</th>
-        <th>Price</th>
+        <th>Imagen</th>
+        <th>Producto</th>
+        <th>Cantidad</th>
+        <th>Eliminar</th>
+        <th>Precio unitario</th>
+        <th>Precio</th>
       </tr>
     </thead>
     <tbody>
@@ -32,11 +32,11 @@
               <form action="{% url "cart:cart_add" product.id %}" method="post">
                 {{ item.update_quantity_form.quantity }}
                 {{ item.update_quantity_form.update }}
-                <input type="submit" value="Update">
+                <input type="submit" value="Actualizar">
                 {% csrf_token %}
               </form>
             </td>
-            <td><a href="{% url "cart:cart_remove" product.id %}">Remove</a></td>
+            <td><a href="{% url "cart:cart_remove" product.id %}">Eliminar</a></td>
             <td class="num">Q. {{ item.price }}</td>
             <td class="num">Q. {{ item.total_price }}</td>
           </tr>
@@ -68,16 +68,16 @@
       </tr>
     </tbody>
   </table>
-<p>Apply a coupon:</p>
+<p>Canjear un Cupon:</p>
 <form action="{% url "coupons:apply" %}" method="post">
   {{ coupon_apply_form }}
-  <input type="submit" value="Apply">
+  <input type="submit" value="Canjear">
   {% csrf_token %}
 </form>
   <p class="text-right">
-    <a href="{% url "shop:product_list" %}" class="button light">Continue shopping</a>
+    <a href="{% url "shop:product_list" %}" class="button light">Continuar Comprando</a>
     <a href="{% url "orders:order_create" %}" class="button">
-      Checkout
+      Comprar
     </a>
   </p>
 {% endblock %}
